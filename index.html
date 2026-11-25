@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Horario de RobeLuis</title>
+<meta property="og:title" content="Horario de RobeLuis">
+<meta property="og:description" content="Mis clases de la noche, con calendario y cuenta regresiva.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pepit234.github.io/horario/">
+<meta property="og:image" content="https://pepit234.github.io/horario/foto.jpg">
+<meta property="og:image:width" content="600">
+<meta property="og:image:height" content="600">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="foto.jpg">
+
+<style>
+:root{--bg:#161a3a;--surface:#212756;--ink:#f2f4ff;--muted:#aab2e0;--line:#343c7a;--hero:#ffd43b;--hero-ink:#161a3a;--now:#9db4ff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--bg:#eef1ff;--surface:#fff;--ink:#1a2050;--muted:#5d66a0;--line:#d5dbf5;--now:#2b3fd1}}
+:root[data-theme="light"]{--bg:#eef1ff;--surface:#fff;--ink:#1a2050;--muted:#5d66a0;--line:#d5dbf5;--now:#2b3fd1}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;line-height:1.35}
+main{max-width:520px;margin:0 auto;padding:18px 14px 40px}
+h1{font-size:1.1rem;margin:0 0 10px;color:var(--muted)}
+h2{font-size:1.05rem;margin:22px 0 8px}
+.hero{background:var(--hero);color:var(--hero-ink);border-radius:22px;padding:18px}
+.hero .t{margin:0;font-weight:700}
+.hero .day{margin:0 0 10px;font-size:1.7rem;font-weight:800;text-transform:capitalize;line-height:1.15}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-block;padding:6px 11px;border-radius:999px;font-weight:700;font-size:.9rem;color:#fff}
+.units{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.u{background:rgba(255,255,255,.5);border-radius:12px;padding:8px 2px;text-align:center}
+.u b{display:block;font-size:1.8rem;line-height:1;font-variant-numeric:tabular-nums}
+.u span{font-size:.72rem;font-weight:700}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:8px}
+.n{font-weight:800;text-transform:capitalize;margin-bottom:6px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.c{font-weight:800;color:var(--now);text-align:right;font-size:.9rem;font-variant-numeric:tabular-nums}
+.d{font-size:.78rem;color:var(--muted);text-transform:capitalize;text-align:right}
+.none{font-size:.85rem;color:var(--muted)}
+button{font:inherit;font-weight:700;border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:9px 13px;cursor:pointer}
+button.on{border-color:transparent;color:#fff}
+button.main{background:var(--now);color:var(--bg);border-color:var(--now)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--now);outline-offset:2px}
+.edit{display:flex;flex-wrap:wrap;gap:6px}
+input{font:inherit;padding:9px 11px;border:2px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);min-width:0;flex:1}
+.tools{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.hint{font-size:.82rem;color:var(--muted);margin:6px 0 0}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:8px 0}
+.grid .hd{font-size:.75rem;color:var(--muted);text-align:center;font-weight:700}
+.cd{padding:9px 0;border-radius:10px;font-size:.95rem;border:2px solid transparent;background:var(--surface);font-variant-numeric:tabular-nums}
+.cd.cls{background:#2b59d9;color:#fff}
+.cd.off{background:#c92a2a;color:#fff}
+.cd.td{border-color:var(--hero)}
+#dayToggles button{text-transform:capitalize}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px"><img alt="Foto de RobeLuis" width="56" height="56" style="border-radius:50%;object-fit:cover;flex:0 0 auto" src="data:image/jpeg;base64,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"><h1 style="margin:0">Horario de RobeLuis</h1></div>
+  <p class="hint" style="margin:-6px 0 10px">Escuela Básica de Adultos Cristo Rey · 3.º año · 2026-2027 · 6:00 a 9:00 p. m.</p>
+  <section class="hero">
+    <p class="t" id="hT">…</p>
+    <p class="day" id="hDay">…</p>
+    <div class="chips" id="hChips"></div>
+    <p class="t" id="cdT" style="margin-top:14px"></p>
+    <div class="units" id="units">
+      <div class="u"><b id="d">0</b><span>días</span></div>
+      <div class="u"><b id="h">0</b><span>horas</span></div>
+      <div class="u"><b id="m">0</b><span>min</span></div>
+      <div class="u"><b id="s">0</b><span>seg</span></div>
+    </div>
+  </section>
+
+  <h2>Calendario</h2>
+  <div id="cal"></div>
+  <div id="calInfo"></div>
+
+  <h2>Próximas clases</h2>
+  <div id="up"></div>
+
+  <h2>¿Cuándo toca cada materia?</h2>
+  <div id="subs"></div>
+
+  <div class="tools">
+    <button class="main" id="editBtn" type="button">Editar mi horario</button>
+    <button id="theme" type="button">Cambiar tema</button>
+  </div>
+
+  <section id="editor" hidden>
+    <h2>Hora en que empiezas</h2>
+    <div class="edit"><input id="startT" type="time"></div>
+    <h2>Materias de cada día</h2>
+    <div class="edit" id="dayToggles"></div><p class="hint">Marca los días que tienes clase y toca las materias en el orden de las clases: la primera es la de la hora de entrada.</p>
+    <div id="editDays"></div>
+    <h2>Agregar otra materia</h2>
+    <div class="edit">
+      <input id="newSub" type="text" maxlength="24" placeholder="Ej: Música, Arte, Religión">
+      <button id="addSub" type="button" class="main">Agregar</button>
+    </div>
+    <h2>Días sin clase (feriados)</h2>
+    <div id="offList"></div>
+    <label class="card row"><span>Usar feriados de República Dominicana</span><input id="rdChk" type="checkbox" style="flex:0 0 auto;width:22px;height:22px"></label>
+    <div class="edit">
+      <input id="offDate" type="date">
+      <input id="offWhy" type="text" maxlength="40" placeholder="Motivo (opcional)">
+      <button id="addOff" type="button" class="main">Agregar</button>
+    </div>
+    <p class="hint">Todo se guarda en este teléfono. Si lo abres en otro aparato, hay que armarlo otra vez.</p>
+  </section>
+</main>
+<script>
+(function(){
+var DAYS=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+var MONTHS=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+var COLORS=["#2b59d9","#e8590c","#2f9e44","#c2255c","#7048e8","#0c8599","#b35c00","#d6336c","#4263eb","#087f5b"];
+var state={start:"18:00",
+subjects:["Lengua Española","Ciencias Sociales","Ciencias Naturales","Matemáticas","Inglés"],
+sched:{1:["Lengua Española","Ciencias Sociales","Ciencias Naturales"],2:["Matemáticas","Lengua Española","Inglés"],3:["Inglés","Ciencias Naturales","Matemáticas"]},
+days:[1,2,3],rd:true,
+off:{"2026-11-25":"Día contra la violencia hacia la mujer"}};
+try{var raw=localStorage.getItem("horario-noche-v2");if(raw){var p=JSON.parse(raw);if(p&&p.subjects&&p.sched&&p.off&&p.start){if(!p.days)p.days=[1,2,3];if(p.rd===undefined)p.rd=true;state=p}}}catch(e){}
+function save(){try{localStorage.setItem("horario-noche-v2",JSON.stringify(state))}catch(e){}}
+function $(i){return document.getElementById(i)}
+var HOL={"2026-12-25":"Navidad","2027-01-01":"Año Nuevo","2027-01-04":"Santos Reyes (pasa al lunes)","2027-01-21":"Día de la Altagracia","2027-01-25":"Día de Duarte (pasa al lunes)","2027-02-27":"Día de la Independencia","2027-03-26":"Viernes Santo","2027-05-01":"Día del Trabajo","2027-05-27":"Corpus Christi","2027-08-16":"Día de la Restauración","2027-09-24":"Día de las Mercedes","2027-11-06":"Día de la Constitución","2027-12-25":"Navidad"};
+function isOff(d){var k=key(d);return state.off[k]!==undefined||(state.rd&&HOL[k]!==undefined)}
+function whyOff(d){var k=key(d);return state.off[k]||(state.rd&&HOL[k])||""}
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!==undefined)e.textContent=x;return e}
+var calY,calMo,selDay=null;
+function renderCal(){
+var now=new Date();if(calY===undefined){calY=now.getFullYear();calMo=now.getMonth()}
+var c=$("cal");c.innerHTML="";
+var h=el("div","row");
+var pv=el("button","","‹");pv.type="button";pv.setAttribute("aria-label","Mes anterior");
+var nx=el("button","","›");nx.type="button";nx.setAttribute("aria-label","Mes siguiente");
+var tt=el("div","n",MONTHS[calMo]+" "+calY);tt.style.margin="0";
+pv.onclick=function(){calMo--;if(calMo<0){calMo=11;calY--}renderCal()};
+nx.onclick=function(){calMo++;if(calMo>11){calMo=0;calY++}renderCal()};
+h.appendChild(pv);h.appendChild(tt);h.appendChild(nx);c.appendChild(h);
+var g=el("div","grid");
+["L","M","M","J","V","S","D"].forEach(function(x){g.appendChild(el("div","hd",x))});
+var lead=(new Date(calY,calMo,1).getDay()+6)%7,n=new Date(calY,calMo+1,0).getDate(),libres=[];
+for(var i=0;i<lead;i++)g.appendChild(el("div"));
+for(var d=1;d<=n;d++){(function(d){
+var dt=new Date(calY,calMo,d),b=el("button","cd",d);b.type="button";
+if(isOff(dt)){b.classList.add("off");libres.push(d+": "+(whyOff(dt)||"sin clase"))}
+else if(classes(dt.getDay()).length)b.classList.add("cls");
+if(key(dt)===key(now))b.classList.add("td");
+b.onclick=function(){showDay(dt)};g.appendChild(b)})(d)}
+c.appendChild(g);
+if(libres.length)c.appendChild(el("p","hint","Sin clase este mes. "+libres.join(" | ")));
+c.appendChild(el("p","hint","Azul: hay clase. Rojo: feriado o sin clase. Toca un día para ver."));
+showDay(selDay||now);
+}
+function showDay(dt){selDay=dt;var i=$("calInfo");i.innerHTML="";var c=el("div","card");c.appendChild(el("div","n",fmt(dt)));
+if(isOff(dt))c.appendChild(el("div","",(classes(dt.getDay()).length?"Sin clase: ":"Feriado: ")+(whyOff(dt)||"día libre")));
+else if(classes(dt.getDay()).length){var ch=el("div","chips");classes(dt.getDay()).forEach(function(s,i){ch.appendChild(chip(s,i))});c.appendChild(ch)}
+else c.appendChild(el("div","none","No tienes clase este día."));
+i.appendChild(c)}
+function pad(n){return n<10?"0"+n:""+n}
+function key(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())}
+function fmt(d){return DAYS[d.getDay()]+" "+d.getDate()+" de "+MONTHS[d.getMonth()]}
+function col(n){var i=state.subjects.indexOf(n);return COLORS[(i<0?0:i)%COLORS.length]}
+function slot(i){var t=state.start.split(":"),h=((+t[0]||0)+i)%24,m=+t[1]||0;return (h%12||12)+":"+pad(m)}
+function chip(n,i){var s=document.createElement("span");s.className="chip";s.style.background=col(n);s.textContent=(i===undefined?"":slot(i)+" ")+n;return s}
+function classes(dow){return state.sched[dow]||[]}
+function startOf(d){var t=state.start.split(":");return new Date(d.getFullYear(),d.getMonth(),d.getDate(),+t[0]||0,+t[1]||0,0)}
+function addDays(d,n){return new Date(d.getFullYear(),d.getMonth(),d.getDate()+n)}
+function parts(ms){if(ms<0)ms=0;var t=Math.floor(ms/1000);return{d:Math.floor(t/86400),h:Math.floor(t%86400/3600),m:Math.floor(t%3600/60),s:t%60}}
+function short(ms){var p=parts(ms);return(p.d>0?p.d+" d ":"")+pad(p.h)+":"+pad(p.m)+":"+pad(p.s)}
+function isClassDay(d){return classes(d.getDay()).length>0&&!isOff(d)}
+// upcoming class dates (optionally only those with a given subject)
+function upcoming(now,n,subject){
+  var out=[];
+  for(var i=0;i<120&&out.length<n;i++){
+    var d=addDays(now,i);
+    if(!isClassDay(d))continue;
+    if(subject&&classes(d.getDay()).indexOf(subject)<0)continue;
+    if(i===0&&now>=startOf(d))continue;
+    out.push(d);
+  }
+  return out;
+}
+var upEls=[],subEls=[];
+function render(){
+  var now=new Date();
+  var up=$("up");up.innerHTML="";upEls=[];
+  upcoming(now,5).forEach(function(d,i){
+    var c=document.createElement("div");c.className="card";
+    var r=document.createElement("div");r.className="row";
+    var l=document.createElement("div");
+    var n=document.createElement("div");n.className="n";n.textContent=fmt(d);
+    var ch=document.createElement("div");ch.className="chips";
+    classes(d.getDay()).forEach(function(s,i){ch.appendChild(chip(s,i))});
+    l.appendChild(n);l.appendChild(ch);
+    var cc=document.createElement("div");cc.className="c";
+    r.appendChild(l);r.appendChild(cc);c.appendChild(r);up.appendChild(c);
+    upEls.push({d:d,el:cc});
+  });
+  if(!upEls.length){up.innerHTML='<p class="none">No hay clases a la vista. Toca «Editar mi horario».</p>'}
+  var sb=$("subs");sb.innerHTML="";subEls=[];
+  state.subjects.forEach(function(s){
+    var c=document.createElement("div");c.className="card";
+    var r=document.createElement("div");r.className="row";
+    var left=document.createElement("div");left.appendChild(chip(s));
+    var right=document.createElement("div");
+    var cc=document.createElement("div");cc.className="c";
+    var dd=document.createElement("div");dd.className="d";
+    right.appendChild(cc);right.appendChild(dd);
+    r.appendChild(left);r.appendChild(right);c.appendChild(r);sb.appendChild(c);
+    subEls.push({s:s,cc:cc,dd:dd});
+  });
+  var dtg=$("dayToggles");dtg.innerHTML="";
+  [1,2,3,4,5,6,0].forEach(function(dow){var b=el("button","",DAYS[dow]);b.type="button";var on=state.days.indexOf(dow)>=0;if(on){b.className="on";b.style.background="#2b59d9"}b.setAttribute("aria-pressed",on?"true":"false");b.addEventListener("click",function(){var i=state.days.indexOf(dow);if(i>=0){state.days.splice(i,1);delete state.sched[dow]}else state.days.push(dow);save();render();tick()});dtg.appendChild(b)});
+  renderCal();
+  var ed=$("editDays");ed.innerHTML="";
+  [1,2,3,4,5,6,0].filter(function(x){return state.days.indexOf(x)>=0}).forEach(function(dow){
+    var box=document.createElement("div");box.className="card";
+    var n=document.createElement("div");n.className="n";n.textContent=DAYS[dow];
+    var row=document.createElement("div");row.className="edit";
+    state.subjects.forEach(function(s){
+      var b=document.createElement("button");b.type="button";b.textContent=s;
+      var on=classes(dow).indexOf(s)>=0;
+      if(on){b.className="on";b.style.background=col(s)}
+      b.setAttribute("aria-pressed",on?"true":"false");
+      b.addEventListener("click",function(){
+        var l=classes(dow).slice();var i=l.indexOf(s);
+        if(i>=0)l.splice(i,1);else l.push(s);
+        state.sched[dow]=l;save();render();tick();
+      });
+      row.appendChild(b);
+    });
+    box.appendChild(n);box.appendChild(row);ed.appendChild(box);
+  });
+  var ol=$("offList");ol.innerHTML="";
+  Object.keys(state.off).sort().forEach(function(k){
+    var c=document.createElement("div");c.className="card row";
+    var p=k.split("-");var d=new Date(+p[0],+p[1]-1,+p[2]);
+    var t=document.createElement("div");t.style.flex="1";var ds=el("div","n",fmt(d));var inp=document.createElement("input");inp.value=state.off[k]||"";inp.maxLength=60;inp.placeholder="Motivo";inp.setAttribute("aria-label","Motivo");inp.addEventListener("change",function(){state.off[k]=inp.value.trim();save();render();tick()});t.appendChild(ds);t.appendChild(inp);
+    var b=document.createElement("button");b.type="button";b.textContent="Quitar";
+    b.addEventListener("click",function(){delete state.off[k];save();render();tick()});
+    c.appendChild(t);c.appendChild(b);ol.appendChild(c);
+  });
+}
+function showCountdown(ms,label){
+  $("units").hidden=false;$("cdT").textContent=label;var p=parts(ms);
+  $("d").textContent=p.d;$("h").textContent=pad(p.h);$("m").textContent=pad(p.m);$("s").textContent=pad(p.s);
+}
+function chipsFor(d){var hc=$("hChips");hc.innerHTML="";classes(d.getDay()).forEach(function(s,i){hc.appendChild(chip(s,i))})}
+function tick(){
+  var now=new Date(),dow=now.getDay(),k=key(now);
+  var nx=upcoming(now,1)[0];
+  var hc=$("hChips");hc.innerHTML="";
+  if(isOff(now)&&classes(dow).length){
+    $("hT").textContent="Hoy no hay clase";$("hDay").textContent=whyOff(now)||"Día sin clase";
+    if(nx){chipsFor(nx);showCountdown(startOf(nx)-now,"Próxima clase: "+fmt(nx))}else{$("units").hidden=true;$("cdT").textContent=""}
+  }else if(isClassDay(now)&&now<startOf(now)){
+    $("hT").textContent="Hoy toca";$("hDay").textContent=fmt(now);chipsFor(now);
+    showCountdown(startOf(now)-now,"Faltan para que empiece (a las "+state.start+"):");
+  }else if(nx){
+    var diff=Math.round((new Date(nx.getFullYear(),nx.getMonth(),nx.getDate())-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000);
+    var gone=isClassDay(now);
+    $("hT").textContent=gone?"Hoy ya empezó la clase. La próxima:":(diff===1?"Mañana toca":"Próxima clase");
+    $("hDay").textContent=fmt(nx);chipsFor(nx);
+    showCountdown(startOf(nx)-now,"Faltan:");
+  }else{
+    $("hT").textContent="Todavía no hay horario";$("hDay").textContent="Toca «Editar mi horario»";$("cdT").textContent="";$("units").hidden=true;
+  }
+  $("hDay").style.fontSize=$("hDay").textContent.length>22?"1.2rem":"";
+  upEls.forEach(function(e){e.el.textContent=short(startOf(e.d)-now)});
+  subEls.forEach(function(e){
+    var d=upcoming(now,1,e.s)[0];
+    if(!d){e.cc.textContent="No está en tu horario";e.dd.textContent="";return}
+    var diff=Math.round((new Date(d.getFullYear(),d.getMonth(),d.getDate())-new Date(now.getFullYear(),now.getMonth(),now.getDate()))/86400000);
+    e.cc.textContent=diff===0?"¡Hoy!":diff===1?"Mañana":"En "+diff+" días";
+    e.dd.textContent=fmt(d)+" · faltan "+short(startOf(d)-now);
+  });
+}
+$("startT").value=state.start;
+$("rdChk").checked=!!state.rd;
+$("rdChk").addEventListener("change",function(){state.rd=this.checked;save();render();tick()});
+$("startT").addEventListener("change",function(){if(this.value){state.start=this.value;save();tick()}});
+$("editBtn").addEventListener("click",function(){
+  var e=$("editor");e.hidden=!e.hidden;this.textContent=e.hidden?"Editar mi horario":"Listo";
+  if(!e.hidden)e.scrollIntoView({behavior:"smooth"});
+});
+$("addSub").addEventListener("click",function(){
+  var v=$("newSub").value.trim();
+  if(v&&state.subjects.indexOf(v)<0){state.subjects.push(v);save();$("newSub").value="";render();tick()}
+});
+$("addOff").addEventListener("click",function(){
+  var v=$("offDate").value;
+  if(v){state.off[v]=$("offWhy").value.trim();save();$("offDate").value="";$("offWhy").value="";render();tick()}
+});
+$("theme").addEventListener("click",function(){
+  var r=document.documentElement,a=r.getAttribute("data-theme");
+  var light=a==="light"||(a!=="dark"&&matchMedia("(prefers-color-scheme: light)").matches);
+  r.setAttribute("data-theme",light?"dark":"light");
+});
+render();tick();setInterval(tick,1000);
+})();
+</script>
+</body>
+</html>
