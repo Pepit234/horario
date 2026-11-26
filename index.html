@@ -14,6 +14,7 @@
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="foto.jpg">
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
 <style>
 :root{--bg:#161a3a;--surface:#212756;--ink:#f2f4ff;--muted:#aab2e0;--line:#343c7a;--hero:#ffd43b;--hero-ink:#161a3a;--now:#9db4ff;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -55,14 +56,25 @@ input{font:inherit;padding:9px 11px;border:2px solid var(--line);border-radius:1
 .cd.off{background:#c92a2a;color:#fff}
 .cd.td{border-color:var(--hero)}
 #dayToggles button{text-transform:capitalize}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.brand{flex:1;min-width:0;text-align:center}
+.school{font-family:Pacifico,"Brush Script MT",cursive;font-weight:400;font-size:1.55rem;line-height:1.15;margin:0;background:linear-gradient(90deg,#ffd43b,#ff922b,#ff6b6b);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.small{margin:3px 0 0;font-size:.75rem;color:var(--muted)}
+.me{display:flex;flex-direction:column;align-items:center;width:78px;text-decoration:none;color:var(--ink);flex:0 0 auto}
+.me .av{width:48px;height:48px;border-radius:50%;background:var(--now);color:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;overflow:hidden}
+.me .av img{width:100%;height:100%;object-fit:cover;display:block}
+.meName{font-size:.78rem;font-weight:700;text-align:center;max-width:78px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:3px}
+.op{font-size:.65rem;font-weight:800;background:var(--hero);color:var(--hero-ink);border-radius:999px;padding:1px 7px;margin-top:2px}
 [hidden]{display:none!important}
 </style>
 </head>
 <body>
 <main>
-  <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px"><img alt="Foto de RobeLuis" width="56" height="56" style="border-radius:50%;object-fit:cover;flex:0 0 auto" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCACMAIwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwC7q/iS3s2MYJuJ/wC4h4X6ntWHFa6x4kk3SMIrYHrjCD6eprT0fw3BCVkvcSSdQn8I+vrXRTlYYOoUDgegrQDmm0iLTSBbp5hA5mbrn6dqsafMba+jYtywIyatveQr0y59ulZV9PtdZY4QuD27VqtrEHXR6o4XBINSDU29q4k+IY4uJFfPsKUeJrXPJkX6rWdirnbjUSewp4v/AGrh18UWQbBkf67TVlPE+nnrc4/4CaVgOv8At3FRvqAHNc8mrxXCBoZQ49qf9pyMk1jUqcptCnzGtLqpxxVc6wynrmsmW5J4FVy5POa5nVZuqSNG61aefILFR7VmTSAg+ppjuTxTByaTk3uWopAqk9alC4oUe1SqvqKgoVckU7ZQBTt1AHUCMf3f0rOvIf37KDx6VNBFcn53d8dlz1p9qxuYt81q8EmSGSTH5g9xXr2seXcyHs/SNT+lRG0yDyV9jzXQmzjf7oIPtVSaFUYruBxVIDCfTSx/1ccn4Cq8umIow9nt+qVutEpqW2gmGXMrRxDv6+wFVYVzlv7JtZHAMCjPfpUx8N2eQ5hdUHqx+aulkcmTKnaFPyjAOPc+9UdSvHZRExX3KrisKjsrmkFd2KENpb2qbIUCqKGbPA6UhkyMCm57AV5sndndFWQh6032xT+lT2tv5h3npUpXLbsU2hcDJFIBWhcJtYDHFUmChjzTasJO45WCinCXNQMaWOTDcCkUWQWz0oxu5p8aGQ5PA9KsCNQO1JsC8l1dZwHZvqM1ft3mf/WRgD1plrexzfJtCN6djVoCvaZ5JXvJpYk+RSFPVhWeXJ962/lI2nBz2qoltEkzNAMkfxNyF+nqaE0h2K8UAjw9x16iPufr6U2WdpG5PA4AHQVaaz3nJlJz14pp09cf6w/lS5gsUmcIpY9qx3zPMXc9TWhqRWFjCHz61nbj2rixFS75UdVGHUd5SZ4NSpEmMmoVJGaWaUpEcdT0rkudKGuEeUJHye9atsqhAoIFZVqhRhu6962YIwwBC8+1aQIkytexgldrA1jPy5xXQXVuY4nfkkgjp0rDCjilUKgQlSangiwcmnACplUYrMskT0FSgepqqzMOnFM3n1NSBvyXun2dz5MsDRuOQxj4PuKf/aNrO4C3Kqvq2RT72GO6gHnKAP4fXPtWHLbPAcAZFenOpJHBCnGRutcREFI5FK9zu5b/AAFOW4itkLzSIi445/pXO+YVGKrzTZOaxeI8jVUPM6j+1bXGUZmHstU7rXJFBFvCP95v8KxoZ2K4XmnbZCSah4iTKVBIY2+Zy7NuYnJJoI29aVlaLawwd3XFOdd+GQ7gawbubJWHoVKHioZU3P64NSIjSK6DjNNgic5XglTg0hj4omc53AGrkKzRHKzH8KbFbnHPWrKQcVUZEtBG8jZ86QsD2PSsQoVJ54rbeEN8rEge1Zt5bhHwpOKcncI6FBpDnAp6ykCmmPmnpHjqKg0HrLzzyKUzDP3VpCoHaoxEzc0gOu25JZjuc8Fv8KqXEBY/LzVotxSKcV6rVzzU7GNdQGMZOBj1rLnnjHBRWxXSX1il3bSKH2yEfKT61yyWX794rksjJ94d65ZwsdFOZJFMhwYtw9qsmUhfmqsGijby7YMAOpJzmrMcLS4yM1ztam6kC8pyeKlhZbeJpCuYwR+Ge9WIkhVtsg61BE3l6m9q/Mbg4B7ilYLkw2x3K4wBL0qOB/LszcOMushV8fWopopEKxjJMTHafbtVqJl8iRXA2S9R70h3LayI0SSJyGHGKtxJuTOK5a71k6TEmnptMxGS7DIjU9OO5qnpuq3d1qQV7hzGByFOAe2atRe5HN0OundEO1nAJ6DNUbtht5Gala0hgcM2Xdu7HJqO4XA2t0qRmQQQ2amDYTjGabPgPxT1VSmaRY1Qz8mnhlUY5ppdRHxwajAyMmnYVzpVvIWOHjeP3HzCp0aGThJVP14P61Ue1mQZKce1MEbMcBCT9K9flPMuaDREdRXM65GRqZZgRuQYNa1y66Xb/aLy8S0Ttuf5m+ijk1z7akviW6NvaM4mjQsnm4XzAOo+tZVVoXB6iQtHG2WOBWjDdW6pu3rj61zwyzGKXIIOCp7Gr1iLVJF3RDg9a4WjrTHXmv20M2EVpWHYcAfjUSa/b3N5EtzB5DLwsqvuH41Hq2iMJGliJMbtuSUKWHPZsdKz4NHkk3DPmtj/AJZq2B+JFOysJt3OmleWKYFxlT3q3aBJpUUj5c5rLtb9XsVt7g5eMYDetX7ORVXK9SKhqxa1MnWNMNxrF0GSTaWBSRFyeg4x3qfR9GWzJmlEix5yzyqFZsdABU73ssOqpcDBVeoqw91Jey+Y/A7LQ5hyk3nNc3YlYYA6L6CmX06SS7VbAX2pPkRCzLjHvVNH8xixJx6UJB1I5F3PnqKsRqDFxxUeFZueBTjIF+VRmpsVcjkUKORmojMoOMVYZdx6HNKLaBRhxz3yapIVzpL/AFC3sEBnlRCxwN7YFczqXjGaBnh08RyMRjziMhfoO9N8W6RNOyalFLuVBseFuoyeq/1rnRFtIViM+gNejKVtDgjG5Tnlnu7kvPK8sh6u5ya1/CbxW3iGGSQEja4B7KSOpqk8Qj5HVq1NEgWOOSX+NuPoKlaspqxp67Hb3E/2m2+9j58DAPvWOrkHjg1o3MhSPA71leapfAFTVglsVTkzTtbyaHHlysueoB4q9/aUwQr8p3DsKyUhY4IP61Mkc/ONox3Zq5XFnQpIpzxsspkA4z0q/p8zLyxAHuacArfLM0YB64bJqrcaNdRIZYbhbiPrtxhgP61Nrl3SNBI4proeW4cnkgVfW2+dQMIO5Y4xVfQ0htLPzZTmaXk8cgdhVshS3nKitz1kfH6UcgnMztdktkmjga6KgrkbVPP6U2NbdYlAuTnHUoabf6hdy3215GRQMKhUFceozUhnUYMsYGf4lq7EJjHCjlJA/wBKjQMZN3IA9aJ0JHmRMJFHXb1X6ilSYFQX/Op5SrlkNgbj0ArPlkZ5Cwc4pt5deWCzNlewFZb3hZiQcCqUSXI1/Gd7cjUhYeaEt40VwqH7xPc/T0rnY/LMgwckUkuZpWlkJZ2OSSeTTogE6DFdMnc50rFhhuOfShr6SG1mt0wPNIBPfFOj5FPNsrOJGHSkmNjIiYoRknpVbzCznbwPWrUh3H2qlMjMcYwPam9RLQvW92qMAzlz7dKv+eknBRTnpmuewU6cVatrhkG5uT0X/Gk4jUjfgUxr8hRB6KvNTNLJt+XlvUmsUXfAGaU3JxjefzqOUq9zUWVoAS8o+gqNNRk88bj+6Jwwx29azPOXqTTGuwo4osFzekkjUGOXlP4T/d9xVf7QYFKEB0PVT0P09KyheSSRjJyV/UVds0a4BRgeOVJ7ipaKTLCtgeZASP5ihCzkl1x9KtwwYAG2qmsMbW2+Tgtx9KlajMi+dpJiRnA4FEenyugYjGafpOy4vljnPGMjPc1vtGgOBwKt3RKdzkhzUqDNQrU8fWtGQXbSDzJFB6VPfuqOIlGNop2m/wCtFVdQkY3sn1oQMgYmonk46VJnIqN1HWqJIs88inZUgAcUbRTQMNTEK2c0hY+tK9MPSosUBY+tNHNJ3p6ikUi3YwFn3dhWvA6x7ePuntUNnGq2qkd+at2sasGJ9axkzWKLsM8bPwetVr+zlvrlVyPKxU1rEnmtx0qSd2jYFDinS1kKpohYNJ0+1iO+FWAHJYZqvKlsZD5dqqr2yxP9atTu0lrGWPU81CEBHeu1RXU5Wz//2Q=="><h1 style="margin:0">Horario de RobeLuis</h1></div>
-  <p class="hint" style="margin:-6px 0 10px">Escuela Básica de Adultos Cristo Rey · 3.º año · 2026-2027 · 6:00 a 9:00 p. m.</p>
-  <p class="hint" style="margin:-4px 0 12px"><a href="perfiles.html" style="color:var(--now);font-weight:700">👥 Perfiles de compañeros</a></p>
+  <header class="top">
+    <div class="brand"><h1 class="school">Escuela Cristo Rey</h1><p class="small">Horario de clases · 3.º año · 6:00 a 9:00 p. m.</p></div>
+    <a class="me" id="me" href="perfiles.html" aria-label="Mi perfil"><span class="av" id="meAv">👤</span><span class="meName" id="meName">Crear perfil</span><span class="op" id="meOp" hidden>Operador</span></a>
+  </header>
+  <p class="hint" style="margin:0 0 12px"><a href="perfiles.html" style="color:var(--now);font-weight:700">👥 Ver perfiles de compañeros</a></p>
   <section class="hero">
     <p class="t" id="hT">…</p>
     <p class="day" id="hDay">…</p>
@@ -304,6 +316,31 @@ $("theme").addEventListener("click",function(){
 });
 render();tick();setInterval(tick,1000);
 })();
+</script>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {getFirestore,doc,onSnapshot} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const app=initializeApp({apiKey:"AIzaSyCgdSFziFWl_1wujBfZguvNeDY_KVI6BDQ",authDomain:"perfiles-horario.firebaseapp.com",projectId:"perfiles-horario",storageBucket:"perfiles-horario.firebasestorage.app",messagingSenderId:"512921423727",appId:"1:512921423727:web:c8d9e5eeb20d272853a29a"});
+const OPERADOR="awXs3SBHtNgeNE8dDBhFP3yLHjX2";
+const OKIMG=/^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/;
+const auth=getAuth(app),db=getFirestore(app);
+const av=document.getElementById("meAv"),nm=document.getElementById("meName"),op=document.getElementById("meOp"),me=document.getElementById("me");
+let unsub=null;
+function reset(){av.textContent="👤";nm.textContent="Crear perfil";op.hidden=true;me.title="Crear mi perfil"}
+function show(d,uid){
+  const name=String(d.name||"").slice(0,30)||"Perfil",photo=String(d.photo||"");
+  av.textContent="";
+  if(photo&&photo.length<=30000&&OKIMG.test(photo)){const i=document.createElement("img");i.alt="";i.src=photo;av.appendChild(i)}
+  else av.textContent=name.charAt(0).toUpperCase();
+  nm.textContent=name;op.hidden=(uid!==OPERADOR);
+  me.title=d.approved===true?"Mi perfil":"Mi perfil (en revisión)";
+}
+onAuthStateChanged(auth,u=>{
+  if(unsub){unsub();unsub=null}
+  if(!u){reset();return}
+  unsub=onSnapshot(doc(db,"perfiles",u.uid),s=>{if(s.exists())show(s.data(),u.uid);else reset()},reset);
+});
 </script>
 </body>
 </html>

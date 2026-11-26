@@ -35,6 +35,7 @@ button.main{background:var(--accent);color:var(--btn-ink);border-color:var(--acc
 .person{display:flex;align-items:center;gap:12px;padding:10px 12px;margin-bottom:8px}
 .pname{font-weight:700;word-break:break-word}
 .you{color:var(--muted);font-weight:400}
+.op{margin-left:6px;font-size:.68rem;font-weight:800;background:var(--gold);color:#161a3a;border-radius:999px;padding:1px 8px;vertical-align:middle}
 .hint{font-size:.82rem;color:var(--muted);margin:6px 0 0}
 .status{font-size:.9rem;margin:10px 0 0;font-weight:700}
 .none{color:var(--muted);font-size:.9rem}
@@ -97,6 +98,7 @@ const auth=getAuth(app), db=getFirestore(app);
 const $=id=>document.getElementById(id);
 const OKIMG=/^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/;
 let uid=null, mine=null, all=[], photo="", filled=false;
+const OPERADOR="awXs3SBHtNgeNE8dDBhFP3yLHjX2";
 
 function msg(t,err){const m=$("msg");m.textContent=t||"";m.className=err?"err":""}
 function norm(s){return s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase()}
@@ -128,6 +130,7 @@ function renderList(){
     c.appendChild(avatar(p.name,p.photo));
     const n=document.createElement("div");n.className="pname";n.textContent=p.name;
     if(p.id===uid){const t=document.createElement("span");t.className="you";t.textContent=" (tú)";n.appendChild(t)}
+    if(p.id===OPERADOR){const o=document.createElement("span");o.className="op";o.textContent="Operador";n.appendChild(o)}
     c.appendChild(n);box.appendChild(c);
   });
 }
